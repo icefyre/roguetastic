@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Canvas Test</title>
+</head>
+<body>
+<section>
+
+<div>
+<canvas id="canvas" width="640" height="480" style = "position:absolute;left:0;top:0;z-index: 1">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+<canvas id="floor" width="640" height="480" style = "position:absolute;left:0;top:0; z-index: 0">
+This text is displayed if your browser does not support HTML5 Canvas.
+
+</canvas>
+</div>
+
+<script type="text/javascript">
+var canvas;
+var ctx;
+var dx = 5;
+var dy = 5;
+var x = 150;
+var y = 100;
+var WIDTH = 639;
+var HEIGHT = 479;
+
+function circle(x,y,r) {
+ctx.beginPath();
+ctx.arc(x, y, r, 0, Math.PI*2, true);
+ctx.fill();
+}
+
+function rect(x,y,w,h) {
+fctx.beginPath();
+fctx.rect(x,y,w,h);
+fctx.closePath();
+fctx.fill();
+fctx.strokeStyle = "white";
+fctx.fillStyle = "white";
+
+for (var i = 0; i < 640; i+=5)
+{
+	for (var j = 0 ; j < 480; j+=5)
+	{
+		fctx.fillText(".", i, j);
+	}
+	//ctx.fillText(".",i,100);
+}
+
+fctx.stroke();
+}
+
+function clear() {
+ctx.clearRect(0, 0, WIDTH, HEIGHT);
+}
+
+function init() {
+canvas = document.getElementById("canvas");
+ctx = canvas.getContext("2d");
+
+floor = document.getElementById("floor");
+fctx = floor.getContext("2d");
+fctx.fillStyle = "black";
+rect(0,0,WIDTH,HEIGHT);
+
+
+return setInterval(draw, 50);
+}
+
+function doKeyDown(evt){
+switch (evt.keyCode) {
+case 38:  /* Up arrow was pressed */
+if (y - dy > 0){
+y -= dy;
+}
+break;
+case 40:  /* Down arrow was pressed */
+if (y + dy < HEIGHT){
+y += dy;
+}
+break;
+case 37:  /* Left arrow was pressed */
+if (x - dx > 0){
+x -= dx;
+}
+break;
+case 39:  /* Right arrow was pressed */
+if (x + dx < WIDTH){
+x += dx;
+}
+break;
+}
+}
+
+function draw() {
+clear();
+//fctx.fillStyle = "black";
+//fctx.strokeStyle = "white";
+//fctx.rect(0,0,WIDTH,HEIGHT);
+//ctx.fillStyle = "black";
+//circle(x, y, 10);
+ctx.fillStyle = "white";
+ctx.font = "20px Impact";
+
+ctx.fillStyle = "white";
+ctx.font = "20px Impact";
+ctx.fillText("@", x, y);
+}
+
+init();
+window.addEventListener('keydown',doKeyDown,true);
+</script>
+</section>
+</body>
+</html>
