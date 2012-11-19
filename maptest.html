@@ -9,16 +9,16 @@
 <body style="font-family:Courier New;color:white; font-size: 100%">
 <div id = "wrapper">
 
-<div id="map" style = "position:absolute; left:20%;width: 70%; height: 70%; background-color:black">
+<div id="map" style = "position:absolute; left:20%;width: 800px; height: 550px; overflow-x: auto; background-color:black">
 <script type="text/javascript">
 
 document.write("<table>");	
 for (var i = 0 ; i < 24; i++)
 {
 	document.write("   <tr>");
-	for (var j = 0; j <110; j++)
+	for (var j = 0; j <57;j++)
 	{
-	    document.write("    		<td align=\"center\"   id =\"" + i + ":" + j + "\">");
+	    document.write("    		<td align=\"center\"   id =\"" + j + ":" + i + "\">");
 		document.write(".");
 		document.write("     </td>");
 	}
@@ -29,31 +29,77 @@ document.write("</table>");
 </script>
 
 <script>
-/*
-func moveCreature(e)
+
+/
+
+function Creature(name, image, xloc,yloc)
 {
-	var keycode;
-	if (window.event) keycode = window.event.keyCode;
-	else if (e) keycode = e.which;
-	if (keycode == 40)
+	this.name = name
+	this.image = image
+	this.xloc = xloc
+	this.yloc = yloc
+	
+	this.location=location;
+	function location()
 	{
-		var x= document.getElementById('0:0');
-		x.innerText =  ".";
-		var x= document.getElementById('1:0');
-		x.innerText =  "@";
+		return this.xloc + ":" + this.yloc;
+	}
+	
+	this.draw=draw;
+	function draw(x=this.xloc,y=this.yloc)
+	{
+		if (x <  0 || y < 0) 
+			return;
+		loc = document.getElementById(this.location());
+		loc.innerHTML =  '.';
+		this.xloc = x;
+		this.yloc = y;
+		loc = document.getElementById(this.location());
+		loc.innerHTML =  this.image		
+	}
+}
+
+
+function doKeyDown(evt){
+	switch (evt.keyCode) {
+		case 98:
+		case 40:  /* Down arrow was pressed */
+			{
+				Avatar.draw(Avatar.xloc,Avatar.yloc+1);
+			}
+		    break;
+		case 104:
+		case 38:  /* Up arrow was pressed */
+			{
+				Avatar.draw(Avatar.xloc,Avatar.yloc-1);
+			}
+		   break;
+		case 100:
+		case 37:  /* Left arrow was pressed */
+			{
+				Avatar.draw(Avatar.xloc-1,Avatar.yloc);
+			}
+			break;
+		case 102:
+		case 39:  /* Right arrow was pressed */
+			{
+				Avatar.draw(Avatar.xloc+1,Avatar.yloc);
+			}
+		break;
 		
 	}
 }
-*/
 
+var Avatar = new Creature("Avatar",'@',4,3);
+Avatar.draw();
+//loc = document.getElementById(Avatar.location());
 
+//loc.innerHTML =  "@";
 
-var location= document.getElementById('0:0');
-location.innerText =  "@";
 //input = document.onkeydown = moveCreature
  
 
-//window.addEventListener('keydown',doKeyDown,true);
+window.addEventListener('keydown',doKeyDown,true);
 
 
 
