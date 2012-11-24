@@ -6,24 +6,24 @@
 
 </head>
 
-
 <body style="font-family:Courier New;color:white; overflow-y:hidden; font-size: 100%">
 <div id = "wrapper">
 
 <div id="map" style = "position:absolute; overflow-y:hidden; left:20%; margin-left: -29px ;width: 800px; height: 550px; overflow-x: auto; background-color:black">
-
 <script type="text/javascript">
 
-var MAP_HEIGHT = 24;
-var MAP_WIDTH = 57;
-document.write("<table>");	
-for (var i = 0 ; i < MAP_HEIGHT; i++)
+var MAP_HEIGHT = 16;
+var MAP_WIDTH = 27;
+
+
+document.write("<table cellpadding=\"0\" cellspacing=\"0\">");	
+for (var i = 0 ; i 	< MAP_HEIGHT; i++)
 {
 	document.write("   <tr>");
 	for (var j = 0; j <MAP_WIDTH;j++)
 	{
 	    document.write("		<td align=\"center\">");
-		document.write("		<div   id =\"" + j + ":" + i+"\" style=\"width:30px;height:36px\">.</div>");
+		document.write("		<div   id =\"" + j + ":"  + i+"\" style=\"width:30px;height:33px;background-image:url('grasstiles2.PNG');\"></div>");
 		document.write("		</td>");
 	}
 	document.write("</tr>");
@@ -33,6 +33,8 @@ document.write("</table>");
 </script>
 
 <script>
+
+
 
 function Creature(name, image, xloc,yloc)
 {
@@ -56,7 +58,7 @@ function Creature(name, image, xloc,yloc)
 		if (x <  0 || y < 0 || x >= MAP_WIDTH  || y >= MAP_HEIGHT) 
 			return;
 		loc = document.getElementById(this.location());
-		loc.innerHTML =  '.';
+		loc.innerHTML =  '<img src=\"grasstiles2.png\">';
 		this.xloc = x;
 		this.yloc = y;
 		loc = document.getElementById(this.location());
